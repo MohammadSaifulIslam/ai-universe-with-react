@@ -9,17 +9,25 @@ const Card = () => {
     const [data, setData] = useState([]);
     // hooks for handle showall data and btn
     const [showAll, setShowAll] = useState(false);
-    const handleShowAll = () => setShowAll(true);
     // hooks for get unique id from signle data
     const [uniqueId, setUniqueId] = useState(null);
     // hooks for store single data 
-    const [singleData, setSingleData] =useState({})
+    const [singleData, setSingleData] = useState({})
+
+    // function for setShowAll value (true or false)
+    const handleShowAll = () => setShowAll(true);
+    const handleSortByDate = () =>{
+        const sortData = data.sort((a,b)=>{
+            return new Date(b.published_in) - new Date(a.published_in)
+        })
+        setData([...data, sortData])
+    }
     // fetch single data by using unique id
-    useEffect(()=>{
+    useEffect(() => {
         fetch(`https://openapi.programming-hero.com/api/ai/tool/${uniqueId}`)
-        .then(res=> res.json())
-        .then(data => setSingleData(data.data))
-    },[uniqueId])
+            .then(res => res.json())
+            .then(data => setSingleData(data.data))
+    }, [uniqueId])
 
     // fetch all data
     useEffect(() => {
@@ -31,17 +39,20 @@ const Card = () => {
 
     return (
         <div className='mb-5'>
+            <span onClick={handleSortByDate}>
+            <Button>Sort By Date</Button>
+            </span>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-10'>
                 {
                     data.slice(0, showAll ? 12 : 6).map(singleData => <SingleData key={singleData.id} setUniqueId={setUniqueId} singleData={singleData}></SingleData>)
                 }
             </div>
-           {
-            !showAll && <span onClick={handleShowAll}>
-             <Button>Show All</Button>
-         </span>
-           }
-           <Modal singleData={singleData}></Modal>
+            {
+                !showAll && <span onClick={handleShowAll}>
+                    <Button>Show All</Button>
+                </span>
+            }
+            <Modal singleData={singleData}></Modal>
         </div>
 
     );

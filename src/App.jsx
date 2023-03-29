@@ -7,7 +7,6 @@ const App = () => {
   return (
     <div className='px-10'>
       <Header></Header>
-      <Button>Sort By Date</Button>
       <Card></Card>
     </div>
   );

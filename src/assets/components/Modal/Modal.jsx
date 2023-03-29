@@ -29,7 +29,7 @@ const Modal = ({ singleData }) => {
                         </div>
                         <div className='text-center'>
                             <figure className='w-full '>
-                                <img src={image_link[0] && image_link[0]} alt="Album" className='rounded-xl w-full block' />
+                                <img src={image_link && image_link[0] } alt="Album" className='rounded-xl w-full block' />
                             </figure>
                             {input_output_examples && input_output_examples[0] ? <h4  className='text-center text-xl font-semibold'>{input_output_examples[0].input}</h4> : <h4  className=' text-xl font-semibold'>Can you give any example?</h4>}
                             {input_output_examples && input_output_examples[0] ? <h4>{input_output_examples[0].output}</h4> : <h4>No! Not Yet! Take a break!!!</h4>}
