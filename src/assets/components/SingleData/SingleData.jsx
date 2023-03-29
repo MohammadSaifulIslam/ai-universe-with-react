@@ -6,11 +6,15 @@ const SingleData = (props) => {
         <div>
             <div className="card w-full  bg-base-100 shadow-2xl">
                 <figure><img className='w-full h-52' src={image} alt="Shoes" /></figure>
-                <div className="card-body">
-                    <h2 className="font-bold text-2xl">Features</h2>
+                <div className="card-body ">
+                  <div className='relative h-28'>
+                  <div className="features absolute top-0">
+                     <h2 className="font-bold text-2xl">Features</h2>
                     {
                         features.map((feature, index) => <p>{index + 1}. {feature}</p>)
                     }
+                   </div>
+                  </div>
                     <hr className='border border-slate-200' />
                     <h2 className="card-title font-bold text-2xl">{name}</h2>
                     <div className='flex justify-between'>
